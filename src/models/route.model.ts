@@ -3,4 +3,6 @@ export const PublicRoutes = {
 	SIGN_UP: "/sign-up",
 };
 
-export const PrivateRoutes = {};
+export const PrivateRoutes = {
+	DASHBOARD: "/dashboard",
+};

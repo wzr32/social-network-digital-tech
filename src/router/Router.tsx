@@ -1,10 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { PublicRoutes } from "../models";
+import { PrivateRoutes, PublicRoutes } from "../models";
 
 import { LoginView } from "@/pages/public/auth/views/login";
 import { RegisterView } from "@/pages/public/auth/views/register";
 import { Layout, LayoutAuth } from "@/layout/views";
+import { DashboardView } from "@/pages/private/dashboard/views";
 
 const Router = () => (
 	<Routes>
@@ -13,7 +14,9 @@ const Router = () => (
 			<Route path={PublicRoutes.SIGN_IN} element={<LoginView />} />
 			<Route path={PublicRoutes.SIGN_UP} element={<RegisterView />} />
 		</Route>
-		<Route element={<Layout />} />
+		<Route element={<Layout />}>
+			<Route path={PrivateRoutes.DASHBOARD} element={<DashboardView />} />
+		</Route>
 	</Routes>
 );
 export default Router;
