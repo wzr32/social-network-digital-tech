@@ -1,13 +1,14 @@
 import { Outlet } from "react-router-dom";
+import { Box } from "@mui/material";
 
 import { Navbar } from "../components/navbar";
 
 const LayoutDashboard = () => (
 	<>
 		<Navbar />
-		<main>
+		<Box component='main' sx={{ padding: "2em 3em" }}>
 			<Outlet />
-		</main>
+		</Box>
 	</>
 );
 export default LayoutDashboard;
