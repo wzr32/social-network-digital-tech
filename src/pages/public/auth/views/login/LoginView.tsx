@@ -1,18 +1,32 @@
-import { FC } from "react";
-import { Button, Grid2, Stack, TextField, Typography } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
+import {
+	Button,
+	CircularProgress,
+	Grid2,
+	Stack,
+	TextField,
+	Typography,
+} from "@mui/material";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { loginSchema, LoginType } from "../../schemas";
+import { loginService } from "../../services";
 
-import { PublicRoutes } from "@/models";
+import { PrivateRoutes, PublicRoutes } from "@/models";
+import { useStore } from "@/store";
 
 const defaultValues: LoginType = {
 	username: "",
 };
 
 const LoginView: FC = () => {
+	const navigate = useNavigate();
+
+	const { isAuth } = useStore();
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
 	const {
 		register,
 		handleSubmit,
@@ -24,12 +38,22 @@ const LoginView: FC = () => {
 		resolver: zodResolver(loginSchema),
 	});
 
-	const onSubmit = void handleSubmit(() => {
-		// console.log("submitted data =>> ", data);
-	});
+	const onSubmit = (data: LoginType) => {
+		setIsLoading(true);
+		setTimeout(() => {
+			loginService(data);
+			setIsLoading(false);
+		}, 2000);
+	};
+
+	useEffect(() => {
+		if (isAuth) {
+			navigate(PrivateRoutes.DASHBOARD);
+		}
+	}, [isAuth, navigate]);
 
 	return (
-		<Stack spacing={4}>
+		<Stack spacing={4} width='100%'>
 			<Typography variant='h4' gutterBottom>
 				Login
 			</Typography>
@@ -42,11 +66,17 @@ const LoginView: FC = () => {
 						{...register("username")}
 						error={Boolean(errors.username)}
 						helperText={Boolean(errors.username) && errors.username?.message}
+						disabled={isLoading}
 					/>
 				</Grid2>
 			</Grid2>
-			<Button variant='contained' onClick={onSubmit}>
-				sign in
+			<Button
+				variant='contained'
+				onClick={() => {
+					void handleSubmit(onSubmit)();
+				}}
+				disabled={isLoading}>
+				{isLoading ? <CircularProgress size={20} /> : "sign in"}
 			</Button>
 			<Typography>
 				Don &apos; t have an account{" "}
@@ -57,4 +87,5 @@ const LoginView: FC = () => {
 		</Stack>
 	);
 };
+
 export default LoginView;
