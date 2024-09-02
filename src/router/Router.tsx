@@ -7,6 +7,7 @@ import { RegisterView } from "@/pages/public/auth/views/register";
 import { LayoutAuth, LayoutDashboard } from "@/layout/views";
 import { DashboardView } from "@/pages/private/dashboard/views";
 import { UserProfileView } from "@/pages/private/user-profile";
+import { AuthGuard } from "@/guards";
 
 const Router = () => (
 	<Routes>
@@ -15,10 +16,12 @@ const Router = () => (
 			<Route path={PublicRoutes.SIGN_IN} element={<LoginView />} />
 			<Route path={PublicRoutes.SIGN_UP} element={<RegisterView />} />
 		</Route>
-		<Route element={<LayoutDashboard />}>
-			<Route path={PrivateRoutes.DASHBOARD} element={<DashboardView />} />
+		<Route element={<AuthGuard />}>
+			<Route element={<LayoutDashboard />}>
+				<Route path={PrivateRoutes.DASHBOARD} element={<DashboardView />} />
+			</Route>
+			<Route path={PrivateRoutes.USER_PROFILE} element={<UserProfileView />} />
 		</Route>
-		<Route path={PrivateRoutes.USER_PROFILE} element={<UserProfileView />} />
 	</Routes>
 );
 export default Router;

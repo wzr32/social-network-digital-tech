@@ -1,5 +1,14 @@
-// import { LoginType, RegisterType } from "../schemas";
+import { LoginType, RegisterType } from "../schemas";
 
-// export const loginService = (_: LoginType): void => {};
+import { useStore } from "@/store/";
 
-// export const registerService = (_: RegisterType): void => {};
+const currentState = useStore.getState();
+
+export const loginService = (body: LoginType): void => {
+	const { username } = body;
+	currentState.loginUser(username);
+};
+
+export const registerService = (body: RegisterType): void => {
+	currentState.registerUser(body);
+};
