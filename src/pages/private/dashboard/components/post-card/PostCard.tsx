@@ -42,7 +42,6 @@ const PostCard: FC<Post> = ({ author, id, likes, location, message }) => {
 							onClick={handleLike}
 						/>
 						{location && <Chip label={location} icon={<LocationOn />} />}
-						<Chip label={location} icon={<LocationOn />} />
 					</Stack>
 				</Stack>
 			</CardContent>

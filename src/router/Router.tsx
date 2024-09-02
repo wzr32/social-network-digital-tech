@@ -6,7 +6,7 @@ import { LoginView } from "@/pages/public/auth/views/login";
 import { RegisterView } from "@/pages/public/auth/views/register";
 import { LayoutAuth, LayoutDashboard } from "@/layout/views";
 import { DashboardView } from "@/pages/private/dashboard/views";
-import { UserProfileView } from "@/pages/private/user-profile";
+import { UserProfileView } from "@/pages/private/user-profile/views";
 import { AuthGuard } from "@/guards";
 
 const Router = () => (
