@@ -27,9 +27,9 @@ interface UserStoreType {
 	loginUser: (username: string) => void;
 	registerUser: (user: User) => void;
 	logoutUser: () => void;
-	createPost: (post: Post | Post[]) => void;
+	createPost: (post: Post) => void;
 	getUserPosts: (username: string) => Post[];
-	// setLike: (postId: string, username: string) => void;
+	setLike: (postId: string, username: string) => void;
 }
 
 export const useStore = create<UserStoreType>()(
@@ -41,6 +41,7 @@ export const useStore = create<UserStoreType>()(
 			isAuth: false,
 			loginUser: (username: string) => {
 				const user = get().users.find((u) => u.username === username);
+
 				if (!user) {
 					toast.error("User not found");
 					return;
@@ -62,24 +63,35 @@ export const useStore = create<UserStoreType>()(
 			logoutUser: () => {
 				set({ user: initialUserState, isAuth: false });
 			},
-			createPost: (post: Post | Post[]) => {
-				const posts = Array.isArray(post) ? post : [post];
-				set({ data: { posts: [...get().data.posts, ...posts] } });
+			createPost: (post: Post) => {
+				set({
+					data: {
+						posts: [
+							...get().data.posts,
+							{ ...post, author: { ...post.author } },
+						],
+					},
+				});
 			},
 			getUserPosts: (username: string) =>
 				get().data.posts.filter((post) => post.author.username === username),
-			// setLike: (postId: string, username: string) => {
-			// 	const post = get().data.posts.find((post) => post.id === postId);
-			// 	if (!post) return;
+			setLike: (postId: string, username: string) => {
+				const post = get().data.posts.find((post) => post.id === postId);
+				if (!post) {
+					toast.error("Something went wrong");
+					return;
+				}
 
-			// 	const isLiked = post.likes.includes(username);
+				const isLiked = post.likes.includes(username);
 
-			// 	isLiked
-			// 		? post.likes.splice(post.likes.indexOf(username), 1)
-			// 		: post.likes.push(username);
+				if (isLiked) {
+					post.likes.splice(post.likes.indexOf(username), 1);
+				} else {
+					post.likes.push(username);
+				}
 
-			// 	return set({ data: { posts: [...get().data.posts] } });
-			// },
+				set({ data: { posts: [...get().data.posts] } });
+			},
 		}),
 		{
 			name: STORAGE_KEY,

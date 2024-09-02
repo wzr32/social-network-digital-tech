@@ -13,7 +13,7 @@ export interface User {
 
 export interface Post {
 	id: string;
-	images: string | string[];
+	images: string | null;
 	message: string;
 	likes: string[];
 	author: User;
