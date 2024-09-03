@@ -8,7 +8,7 @@ export const registerSchema = z.object({
 	username: z.string().min(3).max(50),
 	name: z.string().min(3).max(255),
 	surname: z.string().min(3).max(255),
-	avatar: z.string().url(),
+	avatar: z.string().nullable(),
 });
 
 export type LoginType = z.infer<typeof loginSchema>;

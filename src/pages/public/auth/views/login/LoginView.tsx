@@ -81,7 +81,7 @@ const LoginView: FC = () => {
 			<Typography>
 				Don &apos; t have an account{" "}
 				<NavLink to={PublicRoutes.SIGN_UP} replace={true}>
-					sign up
+					Sign up
 				</NavLink>
 			</Typography>
 		</Stack>
