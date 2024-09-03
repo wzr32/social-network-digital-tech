@@ -80,7 +80,10 @@ const LoginView: FC = () => {
 			</Button>
 			<Typography>
 				Don &apos; t have an account{" "}
-				<NavLink to={PublicRoutes.SIGN_UP} replace={true}>
+				<NavLink
+					to={PublicRoutes.SIGN_UP}
+					replace={true}
+					style={{ textDecorationColor: "inherit", color: "inherit" }}>
 					Sign up
 				</NavLink>
 			</Typography>

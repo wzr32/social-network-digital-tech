@@ -3,6 +3,7 @@ import { Box, Grid2 } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import LoginImage from "@/assets/bg/auth_bg.jpg";
+import mainLogo from "@/assets/logo/logo.svg";
 import { useStore } from "@/store";
 import { PrivateRoutes } from "@/models";
 
@@ -21,7 +22,11 @@ const LayoutAuth: FC = () => {
 			<Grid2
 				size={{ xs: 12, md: 6 }}
 				sx={{ display: { xs: "none", md: "block" } }}>
-				<Box sx={{ height: "100%", padding: "16px 30px" }}>
+				<Box
+					sx={{ height: "100%", padding: "16px 30px", position: "relative" }}>
+					<Box sx={{ position: "absolute", left: 50, top: 30 }}>
+						<img src={mainLogo} alt='Digital tech' />
+					</Box>
 					<img
 						src={LoginImage}
 						alt='auth-images'
