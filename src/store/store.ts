@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 import { Data, Post, User } from "../types/global.types";
 
-const STORAGE_KEY = "dt_user_storage";
+const STORAGE_KEY = "DIGITAL_TECH_STORE";
 
 const initialUserState: User = {
 	avatar: "",
@@ -61,7 +61,8 @@ export const useStore = create<UserStoreType>()(
 				toast.success("User registered successfully");
 			},
 			logoutUser: () => {
-				set({ user: initialUserState, isAuth: false });
+				set({ isAuth: false, user: { ...initialUserState } });
+				toast.success("User logged out successfully");
 			},
 			createPost: (post: Post) => {
 				set({
