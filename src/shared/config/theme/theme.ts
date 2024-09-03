@@ -84,7 +84,7 @@ export const darkModeTheme = responsiveFontSizes(
 					root: {
 						padding: "16px",
 						":last-child": {
-							paddingBottom: 0,
+							paddingBottom: "16px",
 						},
 					},
 				},
@@ -185,7 +185,7 @@ export const lightModeTheme = responsiveFontSizes(
 					root: {
 						padding: "16px",
 						":last-child": {
-							paddingBottom: 0,
+							paddingBottom: "16px",
 						},
 					},
 				},
