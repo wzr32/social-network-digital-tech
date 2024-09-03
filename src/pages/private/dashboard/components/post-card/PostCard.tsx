@@ -13,6 +13,7 @@ import {
 import { likePostService } from "../../services";
 
 import { Post } from "@/types";
+import { useStore } from "@/store";
 
 const PostCard: FC<Post> = ({
 	author,
@@ -23,8 +24,10 @@ const PostCard: FC<Post> = ({
 	location,
 	message,
 }) => {
+	const { user } = useStore();
+
 	const handleLike = () => {
-		likePostService(id);
+		likePostService(id, user.username);
 	};
 
 	return (
