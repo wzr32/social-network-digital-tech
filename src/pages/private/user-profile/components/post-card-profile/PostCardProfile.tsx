@@ -1,44 +1,36 @@
 import { FC } from "react";
 import { Favorite, LocationOn } from "@mui/icons-material";
-import {
-	Avatar,
-	Box,
-	Card,
-	CardContent,
-	Chip,
-	Stack,
-	Typography,
-} from "@mui/material";
+import { Box, Card, CardContent, Chip, Stack, Typography } from "@mui/material";
 
 import { Post } from "@/types";
 
 const PostCardProfile: FC<Post> = ({
-	author,
 	id,
 	images,
 	likes,
 	location,
 	message,
 }) => (
-	<Card elevation={0}>
-		<CardContent>
-			<Stack spacing={2}>
-				{author !== undefined && (
-					<Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
-						<Avatar
-							sx={{ width: "30px", height: "30px" }}
-							src={author.avatar ?? ""}
-						/>
-						<Typography>@{author.username}</Typography>
-					</Box>
-				)}
+	<Card
+		elevation={0}
+		sx={{ height: "100%", minHeight: "300px", maxHeight: "300px" }}>
+		<CardContent sx={{ height: "inherit" }}>
+			<Stack
+				spacing={1}
+				justifyContent='space-between'
+				sx={{ height: "inherit" }}>
 				<Typography variant='body1'>{message}</Typography>
 				{images && (
 					<Box sx={{ height: "200px" }}>
 						<img
 							src={images ?? ""}
 							alt={id}
-							style={{ objectFit: "contain", width: "100%", height: "100%" }}
+							style={{
+								objectFit: "contain",
+								width: "100%",
+								height: "100%",
+								borderRadius: "8px",
+							}}
 						/>
 					</Box>
 				)}

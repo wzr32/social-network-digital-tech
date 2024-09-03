@@ -15,7 +15,8 @@ import { UserStories } from "../components/user-stories";
 import { UserSuggestions } from "../components/user-suggestions";
 
 import { useStore } from "@/store";
-import { Post } from "@/types";
+import { SortPostsOptions } from "@/types";
+import { sortingDataByDate } from "@/utilities/sort.utility";
 
 const DashboardView: FC = () => {
 	const theme = useTheme();
@@ -25,19 +26,11 @@ const DashboardView: FC = () => {
 		data: { posts },
 	} = useStore();
 
-	const [isDescending, setIsDescending] = useState(false);
+	const [sorting, setSorting] = useState<SortPostsOptions>(
+		SortPostsOptions.DESCENDING,
+	);
 
-	const sortingData = (): Post[] =>
-		posts.sort((a, b) => {
-			const date_1 = new Date(a.created_at);
-			const date_2 = new Date(b.created_at);
-
-			if (isDescending) {
-				return date_1.getTime() - date_2.getTime();
-			} else {
-				return date_2.getTime() - date_1.getTime();
-			}
-		});
+	const usersPosts = sortingDataByDate(posts, "created_at", sorting);
 
 	return (
 		<Grid2 container spacing={isMobileView ? 3 : 10}>
@@ -56,26 +49,34 @@ const DashboardView: FC = () => {
 						alignItems='center'>
 						<Typography>{"Post's order"}</Typography>
 						<Button
-							onClick={() => setIsDescending(true)}
-							variant={isDescending ? "contained" : "outlined"}
+							onClick={() => setSorting(SortPostsOptions.ASCENDING)}
+							variant={
+								sorting === SortPostsOptions.ASCENDING
+									? "contained"
+									: "outlined"
+							}
 							size='small'>
 							newer
 						</Button>
 						<Button
-							onClick={() => setIsDescending(false)}
-							variant={!isDescending ? "contained" : "outlined"}
+							onClick={() => setSorting(SortPostsOptions.DESCENDING)}
+							variant={
+								sorting === SortPostsOptions.DESCENDING
+									? "contained"
+									: "outlined"
+							}
 							size='small'>
 							oldest
 						</Button>
 					</Stack>
 				</Grid2>
-				{posts.length === 0 && (
+				{usersPosts.length === 0 && (
 					<Grid2 size={{ xs: 12 }}>
 						<Typography textAlign='center'>No posts</Typography>
 					</Grid2>
 				)}
-				{posts.length > 0 &&
-					sortingData().map((post) => (
+				{usersPosts.length > 0 &&
+					usersPosts.map((post) => (
 						<Grid2 size={{ xs: 12 }} key={`social-post__${Math.random()}`}>
 							<PostCard {...post} />
 						</Grid2>
