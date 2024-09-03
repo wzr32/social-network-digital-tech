@@ -1,5 +1,11 @@
 import { FC } from "react";
-import { Grid2, Stack, Typography } from "@mui/material";
+import {
+	Grid2,
+	Stack,
+	Typography,
+	useMediaQuery,
+	useTheme,
+} from "@mui/material";
 
 import { PostCard } from "../components/post-card";
 import { UserMenu } from "../components/user-menu";
@@ -14,12 +20,15 @@ const DashboardView: FC = () => {
 		data: { posts },
 	} = useStore();
 
+	const theme = useTheme();
+	const isMobileView = useMediaQuery(theme.breakpoints.down("md"));
+
 	return (
-		<Grid2 container spacing={10}>
-			<Grid2 size={{ xs: 3 }}>
+		<Grid2 container spacing={isMobileView ? 3 : 10}>
+			<Grid2 size={{ xs: 3 }} sx={{ display: { xs: "none", md: "inherit" } }}>
 				<UserMenu />
 			</Grid2>
-			<Grid2 size={{ xs: 12, md: 6 }} container spacing={2}>
+			<Grid2 size={{ xs: 12, md: 6 }} container spacing={2} sx={{ order: 1 }}>
 				<Grid2 size={{ xs: 12 }}>
 					<CreatePost />
 				</Grid2>
@@ -35,7 +44,7 @@ const DashboardView: FC = () => {
 						</Grid2>
 					))}
 			</Grid2>
-			<Grid2 size={{ xs: 3 }}>
+			<Grid2 size={{ xs: 12, md: 3 }} sx={{ order: { xs: 0, md: 3 } }}>
 				<Stack spacing={6}>
 					<UserStories />
 					<UserSuggestions />

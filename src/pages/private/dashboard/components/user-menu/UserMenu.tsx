@@ -16,7 +16,7 @@ import {
 	PeopleAlt as PeopleAltIcon,
 	Settings as SettingsIcon,
 } from "@mui/icons-material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { useStore } from "@/store";
 import { PrivateRoutes } from "@/models";
@@ -42,15 +42,19 @@ const menuItems = [
 
 const UserMenu: FC = () => {
 	const { user } = useStore();
+	const navigate = useNavigate();
 
 	const [selected, setSelected] = useState("News Feed");
 
 	const handleSelect = (text: string): void => {
+		if (text === "News Feed") {
+			navigate(PrivateRoutes.DASHBOARD);
+		}
 		setSelected(text);
 	};
 
 	return (
-		<Box>
+		<Box sx={{ margin: "0 auto" }}>
 			<Stack spacing={2} alignItems='center' justifyContent='center'>
 				<Box
 					sx={{
