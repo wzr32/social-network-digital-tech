@@ -20,6 +20,7 @@ const initialDataState: Data = {
 };
 
 interface UserStoreType {
+	actionTrigger: boolean;
 	users: User[];
 	user: User;
 	data: Data;
@@ -35,6 +36,7 @@ interface UserStoreType {
 export const useStore = create<UserStoreType>()(
 	persist(
 		(set, get) => ({
+			actionTrigger: false,
 			users: initialUsersState,
 			user: initialUserState,
 			data: initialDataState,
@@ -74,6 +76,7 @@ export const useStore = create<UserStoreType>()(
 						],
 					},
 				});
+				set({ actionTrigger: true });
 			},
 			getUserPosts: (username: string): Post[] =>
 				get().data.posts.filter((post) => post.author.username === username),
