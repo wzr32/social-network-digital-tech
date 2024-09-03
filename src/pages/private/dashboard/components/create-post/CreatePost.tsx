@@ -19,6 +19,8 @@ import {
 
 import { createPostService } from "../../services";
 
+import { convertBase64 } from "@/utilities";
+
 const CreatePost: FC = () => {
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -40,12 +42,14 @@ const CreatePost: FC = () => {
 		setMessage(e.target.value);
 	};
 
-	const handleChangedInput = (e: ChangeEvent<HTMLInputElement>): void => {
+	const handleChangedInput = async (
+		e: ChangeEvent<HTMLInputElement>,
+	): Promise<void> => {
 		const files = e.target.files;
 		if (!files) return;
 
-		const uri = URL.createObjectURL(files[0]);
-		setImages(uri);
+		const base64 = await convertBase64(files[0]);
+		setImages(String(base64));
 	};
 
 	const handleRemove = (): void => {
@@ -145,7 +149,9 @@ const CreatePost: FC = () => {
 				type='file'
 				accept='.jpg, .png, .jpeg'
 				hidden
-				onChange={handleChangedInput}
+				onChange={(e) => {
+					void handleChangedInput(e);
+				}}
 			/>
 		</>
 	);

@@ -5,7 +5,7 @@ export enum PostStatus {
 }
 
 export interface User {
-	avatar: string;
+	avatar: string | null;
 	name: string;
 	surname: string;
 	username: string;
