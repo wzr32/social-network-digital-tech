@@ -82,7 +82,7 @@ export const darkModeTheme = responsiveFontSizes(
 			MuiCardContent: {
 				styleOverrides: {
 					root: {
-						padding: "16px",
+						padding: "12px",
 						":last-child": {
 							paddingBottom: "16px",
 						},
@@ -183,7 +183,7 @@ export const lightModeTheme = responsiveFontSizes(
 			MuiCardContent: {
 				styleOverrides: {
 					root: {
-						padding: "16px",
+						padding: "12px",
 						":last-child": {
 							paddingBottom: "16px",
 						},
