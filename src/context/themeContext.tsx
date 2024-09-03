@@ -1,5 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { createContext, FC, ReactNode, useEffect, useState } from "react";
+import { createContext, FC, ReactNode, useState } from "react";
 
 import { darkModeTheme, lightModeTheme } from "@/shared/config/theme";
 
@@ -28,10 +28,6 @@ const CustomThemeProvider: FC<CustomThemeProviderProps> = ({ children }) => {
 		setIsDark((prev) => !prev);
 		localStorage.setItem("theme", isDark ? "light" : "dark");
 	};
-
-	useEffect(() => {
-		localStorage.setItem("theme", isDark ? "light" : "dark");
-	}, [isDark]);
 
 	return (
 		<CustomThemeContext.Provider value={{ isDark, handleToggleTheme }}>
