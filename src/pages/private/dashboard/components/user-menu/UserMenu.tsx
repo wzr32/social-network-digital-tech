@@ -1,9 +1,10 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import {
 	Avatar,
 	Box,
 	List,
 	ListItem,
+	ListItemButton,
 	ListItemIcon,
 	ListItemText,
 	Stack,
@@ -15,58 +16,97 @@ import {
 	PeopleAlt as PeopleAltIcon,
 	Settings as SettingsIcon,
 } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
+
+import { useStore } from "@/store";
+import { PrivateRoutes } from "@/models";
 
 const menuItems = [
 	{
 		icon: FeedIcon,
 		text: "News Feed",
-		path: "/",
 	},
 	{
 		icon: ForumIcon,
 		text: "Messages",
-		path: "/",
 	},
 	{
 		icon: PeopleAltIcon,
 		text: "Friends",
-		path: "/",
 	},
 	{
 		icon: SettingsIcon,
 		text: "Settings",
-		path: "/",
 	},
 ];
 
-const UserMenu: FC = () => (
-	<Box>
-		<Stack spacing={2} alignItems='center' justifyContent='center'>
-			<Box
-				sx={{
-					display: "inherit",
-					flexDirection: "inherit",
-					alignItems: "inherit",
-					gap: "10px",
-				}}>
-				<Avatar sx={{ width: "60px", height: "60px" }} />
-				<Typography variant='h6'>@User Name</Typography>
-			</Box>
-			<List sx={{ width: "100%" }}>
-				{menuItems.map((opts) => {
-					const Icon = opts.icon;
-					return (
-						<ListItem key={`menu-item__${Math.random()}`}>
-							<ListItemIcon>
-								<Icon />
-							</ListItemIcon>
-							<ListItemText primary={opts.text} />
-						</ListItem>
-					);
-				})}
-			</List>
-		</Stack>
-	</Box>
-);
+const UserMenu: FC = () => {
+	const { user } = useStore();
+
+	const [selected, setSelected] = useState("News Feed");
+
+	const handleSelect = (text: string): void => {
+		setSelected(text);
+	};
+
+	return (
+		<Box>
+			<Stack spacing={2} alignItems='center' justifyContent='center'>
+				<Box
+					sx={{
+						display: "inherit",
+						flexDirection: "inherit",
+						alignItems: "inherit",
+						gap: "10px",
+					}}>
+					<Avatar
+						sx={{ width: "60px", height: "60px" }}
+						src={user?.avatar ?? ""}
+					/>
+					<NavLink
+						to={PrivateRoutes.USER_PROFILE}
+						style={{ textDecoration: "none" }}>
+						<Typography variant='h6' fontWeight='bold' color='secondary.dark'>
+							@{user?.username}
+						</Typography>
+					</NavLink>
+				</Box>
+				<List sx={{ width: "100%" }}>
+					{menuItems.map((opts) => {
+						const Icon = opts.icon;
+						return (
+							<ListItem key={`menu-item__${Math.random()}`}>
+								<ListItemButton
+									onClick={() => handleSelect(opts.text)}
+									sx={{
+										bgcolor: selected === opts.text ? "primary.main" : "",
+										color:
+											selected === opts.text ? "primary.contrastText" : "paper",
+										borderRadius: "12px",
+										"&:hover": {
+											bgcolor: "primary.light",
+											color: "primary.contrastText",
+										},
+									}}>
+									<ListItemIcon>
+										<Icon
+											sx={{
+												color:
+													selected === opts.text
+														? "primary.contrastText"
+														: "paper",
+											}}
+										/>
+									</ListItemIcon>
+									<ListItemText primary={opts.text} />
+								</ListItemButton>
+							</ListItem>
+						);
+					})}
+				</List>
+			</Stack>
+		</Box>
+	);
+};
 
 export default UserMenu;
