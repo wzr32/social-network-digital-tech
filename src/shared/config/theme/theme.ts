@@ -5,24 +5,80 @@ export const darkModeTheme = responsiveFontSizes(
 		palette: {
 			mode: "dark",
 			primary: {
-				main: "#90caf9",
+				main: "#FF7043",
+				light: "#FFA270",
+				dark: "#C63F17",
+				contrastText: "#FFFFFF",
 			},
 			secondary: {
-				main: "#f48fb1",
+				main: "#4A90E2",
+				light: "#7ABEFF",
+				dark: "#005BB5",
+				contrastText: "#FFFFFF",
 			},
 			background: {
 				default: "#121212",
-				paper: "#1e1e1e",
+				paper: "#1E1E1E",
 			},
 			text: {
-				primary: "#e0e0e0",
-				secondary: "#bdbdbd",
+				primary: "#FFFFFF",
+				secondary: "#BDBDBD",
+				disabled: "#757575",
+			},
+			error: {
+				main: "#F44336",
+				contrastText: "#FFFFFF",
+			},
+			warning: {
+				main: "#FF9800",
+				contrastText: "#FFFFFF",
+			},
+			info: {
+				main: "#2196F3",
+				contrastText: "#FFFFFF",
+			},
+			success: {
+				main: "#4CAF50",
+				contrastText: "#FFFFFF",
 			},
 		},
 		typography: {
 			fontFamily: "Montserrat, sans-serif",
+			h1: {
+				fontWeight: 700,
+				fontSize: "2rem",
+				letterSpacing: "-0.5px",
+			},
+			h2: {
+				fontWeight: 600,
+				fontSize: "1.5rem",
+				letterSpacing: "-0.5px",
+			},
+			body1: {
+				fontSize: "1rem",
+				lineHeight: 1.5,
+			},
+			button: {
+				textTransform: "none",
+			},
 		},
 		components: {
+			MuiButton: {
+				styleOverrides: {
+					root: {
+						borderRadius: 8,
+					},
+				},
+			},
+			MuiCard: {
+				styleOverrides: {
+					root: {
+						borderRadius: 12,
+						boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+						padding: "16px",
+					},
+				},
+			},
 			MuiCardContent: {
 				styleOverrides: {
 					root: {
@@ -33,11 +89,11 @@ export const darkModeTheme = responsiveFontSizes(
 					},
 				},
 			},
-			MuiCard: {
+			MuiAppBar: {
 				styleOverrides: {
-					root: {
-						padding: "16px",
-						borderRadius: "15px",
+					colorPrimary: {
+						backgroundColor: "#1E1E1E",
+						color: "#FFFFFF",
 					},
 				},
 			},
@@ -50,24 +106,80 @@ export const lightModeTheme = responsiveFontSizes(
 		palette: {
 			mode: "light",
 			primary: {
-				main: "#1976d2",
+				main: "#FF7043",
+				light: "#FFA270",
+				dark: "#C63F17",
+				contrastText: "#FFFFFF",
 			},
 			secondary: {
-				main: "#ff4081",
+				main: "#4A90E2",
+				light: "#7ABEFF",
+				dark: "#005BB5",
+				contrastText: "#FFFFFF",
 			},
 			background: {
-				default: "#f5f5f5",
-				paper: "#ffffff",
+				default: "#F4F6F8",
+				paper: "#FFFFFF",
 			},
 			text: {
 				primary: "#212121",
 				secondary: "#757575",
+				disabled: "#BDBDBD",
+			},
+			error: {
+				main: "#F44336",
+				contrastText: "#FFFFFF",
+			},
+			warning: {
+				main: "#FF9800",
+				contrastText: "#FFFFFF",
+			},
+			info: {
+				main: "#2196F3",
+				contrastText: "#FFFFFF",
+			},
+			success: {
+				main: "#4CAF50",
+				contrastText: "#FFFFFF",
 			},
 		},
 		typography: {
-			fontFamily: "Montserrat, sans-serif",
+			fontFamily: "Roboto, Arial, sans-serif",
+			h1: {
+				fontWeight: 700,
+				fontSize: "2rem",
+				letterSpacing: "-0.5px",
+			},
+			h2: {
+				fontWeight: 600,
+				fontSize: "1.5rem",
+				letterSpacing: "-0.5px",
+			},
+			body1: {
+				fontSize: "1rem",
+				lineHeight: 1.5,
+			},
+			button: {
+				textTransform: "none",
+			},
 		},
 		components: {
+			MuiButton: {
+				styleOverrides: {
+					root: {
+						borderRadius: 8,
+					},
+				},
+			},
+			MuiCard: {
+				styleOverrides: {
+					root: {
+						borderRadius: 12,
+						boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+						padding: "16px",
+					},
+				},
+			},
 			MuiCardContent: {
 				styleOverrides: {
 					root: {
@@ -78,11 +190,11 @@ export const lightModeTheme = responsiveFontSizes(
 					},
 				},
 			},
-			MuiCard: {
+			MuiAppBar: {
 				styleOverrides: {
-					root: {
-						padding: "16px",
-						borderRadius: "15px",
+					colorPrimary: {
+						backgroundColor: "#FFFFFF",
+						color: "#212121",
 					},
 				},
 			},
