@@ -40,6 +40,7 @@ export const useStore = create<UserStoreType>()(
 			data: initialDataState,
 			isAuth: false,
 			loginUser: (username: string) => {
+				set({ user: { ...initialUserState } });
 				const user = get().users.find((u) => u.username === username);
 
 				if (!user) {
@@ -47,7 +48,7 @@ export const useStore = create<UserStoreType>()(
 					return;
 				}
 				toast.success("User logged in successfully");
-				set({ user: { ...user }, isAuth: true });
+				set({ user, isAuth: true });
 			},
 			registerUser: (user: User) => {
 				const users = get().users;
@@ -91,7 +92,11 @@ export const useStore = create<UserStoreType>()(
 					post.likes.push(username);
 				}
 
-				set({ data: { posts: [...get().data.posts] } });
+				set({
+					data: {
+						posts: [...get().data.posts.filter((p) => p.id !== post.id), post],
+					},
+				});
 			},
 		}),
 		{

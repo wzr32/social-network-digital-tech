@@ -12,7 +12,7 @@ export const createPostService = (data: Pick<Post, "images" & "message">) => {
 		message: "",
 		likes: [],
 		author: user,
-		created_at: new Date(),
+		created_at: String(new Date()),
 		location: "",
 		status: PostStatus.PUBLISHED,
 	};
@@ -21,6 +21,6 @@ export const createPostService = (data: Pick<Post, "images" & "message">) => {
 	createPost(auxObj);
 };
 
-export const likePostService = (postId: string) => {
-	setLike(postId, user.username);
+export const likePostService = (postId: string, username: string) => {
+	setLike(postId, username);
 };
