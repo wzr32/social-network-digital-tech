@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useRef, useState } from "react";
+import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import {
 	Avatar,
 	Box,
@@ -61,6 +61,20 @@ const CreatePost: FC = () => {
 		createPostService({ message, images, author: user });
 	};
 
+	useEffect(() => {
+		const unSubs = useStore.subscribe((state) => {
+			if (state.actionTrigger) {
+				setMessage("");
+				setImages(null);
+				useStore.setState({ actionTrigger: false });
+			}
+		});
+
+		return () => {
+			unSubs();
+		};
+	}, []);
+
 	return (
 		<>
 			<Card>
@@ -82,6 +96,7 @@ const CreatePost: FC = () => {
 							<InputBase
 								sx={{ ml: 2, flex: 1, color: "#000" }}
 								placeholder='Share something'
+								value={message}
 								multiline
 								maxRows={4}
 								onChange={handleChangeMessage}

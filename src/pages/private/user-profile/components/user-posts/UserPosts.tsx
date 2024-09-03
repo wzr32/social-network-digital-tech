@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Box, Card, CardContent, Grid2, Typography } from "@mui/material";
 
 import { getUserPostsService } from "../../services";
@@ -10,16 +10,16 @@ import { sortingDataByDate } from "@/utilities/sort.utility";
 import { useStore } from "@/store";
 
 const UserPosts: FC = () => {
-	const { user } = useStore();
-	const userPosts = getUserPostsService(user.username);
+	const { user, actionTrigger } = useStore();
+
+	const [userPosts, setUserPosts] = useState<Post[]>([]);
+	const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
 	const posts = sortingDataByDate(
 		userPosts,
 		"created_at",
-		SortPostsOptions.DESCENDING,
+		SortPostsOptions.ASCENDING,
 	);
-
-	const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
 	const handleOpenDialog = (post: Post) => {
 		setSelectedPost(post);
@@ -28,6 +28,13 @@ const UserPosts: FC = () => {
 	const handleCloseDialog = () => {
 		setSelectedPost(null);
 	};
+
+	useEffect(() => {
+		if (!actionTrigger) {
+			const posts = getUserPostsService(user.username);
+			setUserPosts(posts);
+		}
+	}, [actionTrigger, user.username]);
 
 	return (
 		<>
