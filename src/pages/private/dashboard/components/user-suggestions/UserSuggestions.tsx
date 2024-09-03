@@ -1,5 +1,30 @@
-import { Avatar, Box, Chip, Stack, Typography } from "@mui/material";
 import { FC } from "react";
+import { Avatar, Box, Chip, Stack, Typography } from "@mui/material";
+
+import Avatar_1 from "@/assets/dummy/avatars/avatar_1.jpg";
+import Avatar_2 from "@/assets/dummy/avatars/avatar_2.jpg";
+import Avatar_3 from "@/assets/dummy/avatars/avatar_3.jpg";
+
+const suggestions = [
+	{
+		name: "Cristy",
+		surname: "Waterhouse",
+		username: "cwaterhouse6",
+		image: Avatar_1,
+	},
+	{
+		name: "Edin",
+		surname: "Welham",
+		username: "ewelham9",
+		image: Avatar_2,
+	},
+	{
+		name: "Georgy",
+		surname: "Mahedy",
+		username: "gmahedyf",
+		image: Avatar_3,
+	},
+];
 
 const UserSuggestions: FC = () => (
 	<Box>
@@ -7,22 +32,26 @@ const UserSuggestions: FC = () => (
 			Suggestions
 		</Typography>
 		<Stack spacing={2}>
-			{[...(Array(5) as unknown[])].map((_, index) => (
+			{suggestions.map((person) => (
 				<Box
-					key={`suggestions__${index}`}
+					key={`suggestions__${Math.random()}`}
 					sx={{
 						display: "flex",
 						justifyContent: "space-between",
 						alignItems: "center",
 					}}>
 					<Stack spacing={3} direction='row' alignItems='center'>
-						<Avatar sx={{ width: 24, height: 24 }} />
+						<Avatar src={person.image} sx={{ width: 40, height: 40 }} />
 						<Box>
-							<Typography variant='body2'>ivan</Typography>
-							<Typography variant='body2'>shevchenko</Typography>
+							<Typography variant='body2'>
+								{person.name} {person.surname}
+							</Typography>
+							<Typography variant='body2' fontWeight='bold'>
+								@{person.username}
+							</Typography>
 						</Box>
 					</Stack>
-					<Chip clickable label='follow' />
+					<Chip clickable label='Follow' />
 				</Box>
 			))}
 		</Stack>

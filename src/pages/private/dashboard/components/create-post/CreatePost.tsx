@@ -66,7 +66,7 @@ const CreatePost: FC = () => {
 					<Stack spacing={2}>
 						<Box
 							sx={{
-								background: "#fff",
+								background: "#fafafa",
 								color: "#000",
 								borderRadius: "18px",
 								display: "flex",
