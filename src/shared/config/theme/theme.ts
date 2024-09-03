@@ -75,7 +75,7 @@ export const darkModeTheme = responsiveFontSizes(
 					root: {
 						borderRadius: 12,
 						boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
-						padding: "16px",
+						padding: "8px",
 					},
 				},
 			},

@@ -27,7 +27,7 @@ const suggestions = [
 ];
 
 const UserSuggestions: FC = () => (
-	<Box>
+	<Box sx={{ display: { xs: "none", md: "block" } }}>
 		<Typography fontWeight='bold' gutterBottom>
 			Suggestions
 		</Typography>
@@ -57,4 +57,5 @@ const UserSuggestions: FC = () => (
 		</Stack>
 	</Box>
 );
+
 export default UserSuggestions;
