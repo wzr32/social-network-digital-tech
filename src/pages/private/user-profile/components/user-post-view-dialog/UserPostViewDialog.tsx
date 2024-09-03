@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Close, Favorite, LocationOn } from "@mui/icons-material";
 import {
+	Box,
 	Chip,
 	Dialog,
 	DialogContent,
@@ -22,11 +23,13 @@ const UserPostViewDialog: FC<UserPostViewDialogProps> = ({
 	onClose,
 	author,
 	created_at,
+	id,
+	images,
 	likes,
 	location,
 	message,
 }) => (
-	<Dialog open={show} maxWidth='md' fullWidth>
+	<Dialog open={show} maxWidth='sm' fullWidth>
 		<DialogTitle>
 			<Stack
 				spacing={2}
@@ -41,8 +44,12 @@ const UserPostViewDialog: FC<UserPostViewDialogProps> = ({
 		</DialogTitle>
 		<DialogContent>
 			<Stack spacing={2}>
-				<Stack spacing={2} direction='row' alignItems='center'>
-					<Typography>{author?.username ?? ""}</Typography>
+				<Stack
+					spacing={2}
+					direction='row'
+					alignItems='center'
+					justifyContent='space-between'>
+					<Typography>@{author?.username ?? ""}</Typography>
 					<Typography>
 						{created_at !== undefined
 							? new Date(created_at).toLocaleDateString("ES-es").toString()
@@ -51,6 +58,15 @@ const UserPostViewDialog: FC<UserPostViewDialogProps> = ({
 				</Stack>
 
 				<Typography>{message}</Typography>
+				{images && (
+					<Box sx={{ height: "200px" }}>
+						<img
+							src={images ?? ""}
+							alt={id}
+							style={{ objectFit: "contain", width: "100%", height: "100%" }}
+						/>
+					</Box>
+				)}
 
 				<Stack
 					direction='row'

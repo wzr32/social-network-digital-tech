@@ -12,7 +12,14 @@ import {
 
 import { Post } from "@/types";
 
-const PostCardProfile: FC<Post> = ({ author, likes, location, message }) => (
+const PostCardProfile: FC<Post> = ({
+	author,
+	id,
+	images,
+	likes,
+	location,
+	message,
+}) => (
 	<Card elevation={0}>
 		<CardContent>
 			<Stack spacing={2}>
@@ -20,13 +27,21 @@ const PostCardProfile: FC<Post> = ({ author, likes, location, message }) => (
 					<Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
 						<Avatar
 							sx={{ width: "30px", height: "30px" }}
-							src={author.avatar}
+							src={author.avatar ?? ""}
 						/>
 						<Typography>@{author.username}</Typography>
 					</Box>
 				)}
 				<Typography variant='body1'>{message}</Typography>
-				<Box sx={{ maxHeight: "300px", bgcolor: "green" }} />
+				{images && (
+					<Box sx={{ height: "200px" }}>
+						<img
+							src={images ?? ""}
+							alt={id}
+							style={{ objectFit: "contain", width: "100%", height: "100%" }}
+						/>
+					</Box>
+				)}
 				<Stack
 					direction='row'
 					gap='10px'
