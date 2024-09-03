@@ -75,7 +75,7 @@ export const useStore = create<UserStoreType>()(
 					},
 				});
 			},
-			getUserPosts: (username: string) =>
+			getUserPosts: (username: string): Post[] =>
 				get().data.posts.filter((post) => post.author.username === username),
 			setLike: (postId: string, username: string) => {
 				const post = get().data.posts.find((post) => post.id === postId);

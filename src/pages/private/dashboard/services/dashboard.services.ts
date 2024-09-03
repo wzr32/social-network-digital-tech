@@ -3,15 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import { useStore } from "@/store";
 import { Post, PostStatus } from "@/types";
 
-const { user, createPost, setLike } = useStore.getState();
+const { createPost, setLike } = useStore.getState();
 
-export const createPostService = (data: Pick<Post, "images" & "message">) => {
-	const initialObject: Post = {
+export const createPostService = (
+	data: Pick<Post, "images" | "message" | "author">,
+) => {
+	const initialObject: Omit<Post, "images" | "message" | "author"> = {
 		id: uuidv4(),
-		images: null,
-		message: "",
 		likes: [],
-		author: user,
 		created_at: String(new Date()),
 		location: "",
 		status: PostStatus.PUBLISHED,

@@ -68,7 +68,7 @@ const UserInfo: FC = () => {
 	};
 
 	const handleExportData = (): void => {
-		const userPosts = getUserPostsService();
+		const userPosts = getUserPostsService(user.username);
 		const jsonData = JSON.stringify(userPosts, null, 2);
 		const blob = new Blob([jsonData], { type: "application/json" });
 		const url = URL.createObjectURL(blob);

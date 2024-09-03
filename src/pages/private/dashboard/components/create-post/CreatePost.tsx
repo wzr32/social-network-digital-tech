@@ -58,7 +58,7 @@ const CreatePost: FC = () => {
 	};
 
 	const onSubmit = (): void => {
-		createPostService({ message, images });
+		createPostService({ message, images, author: user });
 	};
 
 	return (
