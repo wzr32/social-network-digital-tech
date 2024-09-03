@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 
 import { Navbar } from "../components/navbar";
 
-const LayoutDashboard = () => (
+const Layout = () => (
 	<>
 		<Navbar />
 		<Box component='main' sx={{ padding: "2em 3em" }}>
@@ -11,4 +11,4 @@ const LayoutDashboard = () => (
 		</Box>
 	</>
 );
-export default LayoutDashboard;
+export default Layout;
