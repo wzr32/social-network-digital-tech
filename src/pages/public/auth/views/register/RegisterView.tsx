@@ -181,7 +181,10 @@ const RegisterView: FC = () => {
 					</Button>
 					<Typography variant='body2'>
 						have an account?{" "}
-						<NavLink to={PublicRoutes.SIGN_IN} replace={true}>
+						<NavLink
+							to={PublicRoutes.SIGN_IN}
+							replace={true}
+							style={{ textDecorationColor: "inherit", color: "inherit" }}>
 							Sign in
 						</NavLink>
 					</Typography>
