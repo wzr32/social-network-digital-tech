@@ -7,9 +7,11 @@ import { UserPostViewDialog } from "../user-post-view-dialog";
 
 import { Post, SortPostsOptions } from "@/types";
 import { sortingDataByDate } from "@/utilities/sort.utility";
+import { useStore } from "@/store";
 
 const UserPosts: FC = () => {
-	const userPosts = getUserPostsService();
+	const { user } = useStore();
+	const userPosts = getUserPostsService(user.username);
 
 	const posts = sortingDataByDate(
 		userPosts,
@@ -39,7 +41,7 @@ const UserPosts: FC = () => {
 								</Typography>
 							</Grid2>
 						)}
-						{posts.length > 1 &&
+						{posts.length > 0 &&
 							posts.map((post) => (
 								<Grid2
 									key={`user-post__${Math.random()}`}
