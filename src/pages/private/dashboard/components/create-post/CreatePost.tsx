@@ -20,17 +20,15 @@ import {
 import { createPostService } from "../../services";
 
 import { convertBase64 } from "@/utilities";
+import { useStore } from "@/store";
 
 const CreatePost: FC = () => {
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
-	const [message, setMessage] = useState("");
-	// const [showLocationSearch, setShowLocationSearch] = useState<boolean>(false);
-	const [images, setImages] = useState<string | null>(null);
+	const { user } = useStore();
 
-	// const handleShowLocation = (): void => {
-	// 	setShowLocationSearch((prev) => !prev);
-	// };
+	const [message, setMessage] = useState("");
+	const [images, setImages] = useState<string | null>(null);
 
 	const handleClickInput = (): void => {
 		if (inputRef.current) {
@@ -77,7 +75,10 @@ const CreatePost: FC = () => {
 								alignItems: "flex-start",
 								padding: "5px",
 							}}>
-							<Avatar sx={{ width: "32px", height: "32px" }} />
+							<Avatar
+								sx={{ width: "32px", height: "32px" }}
+								src={user.avatar ?? ""}
+							/>
 							<InputBase
 								sx={{ ml: 2, flex: 1, color: "#000" }}
 								placeholder='Share something'
