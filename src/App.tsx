@@ -1,17 +1,17 @@
 import { BrowserRouter } from "react-router-dom";
-import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 
+import CustomThemeProvider from "./context/themeContext";
+
 import { Router } from "@/router";
-import { darkModeTheme } from "@/shared/config/theme";
 
 const App = () => (
 	<BrowserRouter>
-		<ThemeProvider theme={darkModeTheme}>
-			<CssBaseline />
+		<CustomThemeProvider>
 			<Toaster />
 			<Router />
-		</ThemeProvider>
+		</CustomThemeProvider>
 	</BrowserRouter>
 );
+
 export default App;
